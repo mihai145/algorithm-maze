@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+
+/*
+ *  Screen imports
+ */
+import DrawerNavigator from "./navigation/drawerNavigator";
+
+/*
+ *  Redux imports
+ */
+import { createStore, combineReducers } from "redux";
+import mazeReducer from "./store/reducers/mazeReducer";
+import speedReducer from "./store/reducers/speedReducer";
+import { Provider } from "react-redux";
+
+const rootReducer = combineReducers({
+  maze: mazeReducer,
+  speed: speedReducer,
+});
+
+const store = createStore(rootReducer);
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <DrawerNavigator />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
