@@ -12,9 +12,9 @@ After the algorithm runs, you are given a summary with the distance to the desti
 <br>
 
 <p align="center">
-  <img src="presentation/bfs.jpg" width="300" >
-  <img src="presentation/dfs.jpg" width="300" >
-  <img src="presentation/a_star.jpg" width="300" >
+  <img src="presentation/bfs.jpg" width="200" >
+  <img src="presentation/dfs.jpg" width="200" >
+  <img src="presentation/a_star.jpg" width="200" >
 </p>
 
 <br>
@@ -27,7 +27,7 @@ To further customize your experience, you can swipe right on the screen to acces
 <br>
 
 <p align="center">
-  <img src="presentation/drawer.jpg" width="350" >
-  <img src="presentation/settings.jpg" width="350" >
+  <img src="presentation/drawer.jpg" width="300" >
+  <img src="presentation/settings.jpg" width="300" >
 </p>
 
