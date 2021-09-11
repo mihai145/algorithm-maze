@@ -52,13 +52,13 @@ const getColor = (cell) => {
     return "#FFD700";
   } else if (cell == DISTANCE_ADDITIVE_CT) {
     //start cell
-    return "#7AA0CB";
+    return "#7DF9FF";
   } else if (cell < DISTANCE_ADDITIVE_CT) {
     //non-expanded cell
     return colors[cell];
   } else {
     //path cell
-    return "green";
+    return "#228B22";
   }
 };
 
@@ -161,24 +161,30 @@ const maze = (props) => {
         <Text style={styles.feedbackMessage}>{feedback}</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          title="BFS"
-          color={algorithm === ALGORITHM_BFS ? "green" : "grey"}
-          disabled={mode >= RUNNING_MODE}
-          onPress={() => setAlgorithm(ALGORITHM_BFS)}
-        />
-        <Button
-          title="DFS"
-          color={algorithm === ALGORITHM_DFS ? "green" : "grey"}
-          disabled={mode >= RUNNING_MODE}
-          onPress={() => setAlgorithm(ALGORITHM_DFS)}
-        />
-        <Button
-          title="A*"
-          color={algorithm === ALGORITHM_A_STAR ? "green" : "grey"}
-          disabled={mode >= RUNNING_MODE}
-          onPress={() => setAlgorithm(ALGORITHM_A_STAR)}
-        />
+        <View style={styles.button}>
+          <Button
+            title="BFS"
+            color={algorithm === ALGORITHM_BFS ? "#228B22" : "grey"}
+            disabled={mode >= RUNNING_MODE}
+            onPress={() => setAlgorithm(ALGORITHM_BFS)}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="DFS"
+            color={algorithm === ALGORITHM_DFS ? "#228B22" : "grey"}
+            disabled={mode >= RUNNING_MODE}
+            onPress={() => setAlgorithm(ALGORITHM_DFS)}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="A*"
+            color={algorithm === ALGORITHM_A_STAR ? "#228B22" : "grey"}
+            disabled={mode >= RUNNING_MODE}
+            onPress={() => setAlgorithm(ALGORITHM_A_STAR)}
+          />
+        </View>
       </View>
       <View style={styles.maze}>
         {maze.map((row, rowIndex) => (
@@ -216,64 +222,73 @@ const maze = (props) => {
         ))}
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          title="OBSTACLES"
-          color={mode === TOGGLE_OBSTACLES_MODE ? "green" : "grey"}
-          disabled={mode >= RUNNING_MODE}
-          onPress={() => setMode(TOGGLE_OBSTACLES_MODE)}
-        />
-        <Button
-          title="START CELL"
-          color={mode === SET_START_MODE ? "green" : "grey"}
-          disabled={mode >= RUNNING_MODE}
-          onPress={() => setMode(SET_START_MODE)}
-        />
-        <Button
-          title="FINISH CELL"
-          color={mode === SET_END_MODE ? "green" : "grey"}
-          disabled={mode >= RUNNING_MODE}
-          onPress={() => setMode(SET_END_MODE)}
-        />
+        <View style={styles.button}>
+          <Button
+            title="OBSTACLES"
+            color={mode === TOGGLE_OBSTACLES_MODE ? "#228B22" : "grey"}
+            disabled={mode >= RUNNING_MODE}
+            onPress={() => setMode(TOGGLE_OBSTACLES_MODE)}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="START CELL"
+            color={mode === SET_START_MODE ? "#228B22" : "grey"}
+            disabled={mode >= RUNNING_MODE}
+            onPress={() => setMode(SET_START_MODE)}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="FINISH CELL"
+            color={mode === SET_END_MODE ? "#228B22" : "grey"}
+            disabled={mode >= RUNNING_MODE}
+            onPress={() => setMode(SET_END_MODE)}
+          />
+        </View>
       </View>
       <View style={styles.buttonContainer}>
-        <Button
-          title={mode <= RUNNING_MODE ? "RUN ALGORITHM" : "CLEAR MAZE"}
-          disabled={mode === RUNNING_MODE}
-          onPress={() => {
-            if (mode < RUNNING_MODE) {
-              //Check if the maze is valid before the algorithm starts
-              const n = maze.length,
-                m = maze[0].length;
-              let startX = -1,
-                startY = -1,
-                endX = -1,
-                endY = -1;
+        <View style={{ width: "40%", borderRadius: 10, overflow: "hidden" }}>
+          <Button
+            title={mode <= RUNNING_MODE ? "RUN ALGORITHM" : "CLEAR MAZE"}
+            disabled={mode === RUNNING_MODE}
+            color="#7DF9FF"
+            onPress={() => {
+              if (mode < RUNNING_MODE) {
+                //Check if the maze is valid before the algorithm starts
+                const n = maze.length,
+                  m = maze[0].length;
+                let startX = -1,
+                  startY = -1,
+                  endX = -1,
+                  endY = -1;
 
-              for (let i = 0; i < n; i++) {
-                for (let j = 0; j < m; j++) {
-                  if (maze[i][j] === 2) {
-                    (startX = i), (startY = j);
-                  } else if (maze[i][j] === 3) {
-                    (endX = i), (endY = j);
+                for (let i = 0; i < n; i++) {
+                  for (let j = 0; j < m; j++) {
+                    if (maze[i][j] === 2) {
+                      (startX = i), (startY = j);
+                    } else if (maze[i][j] === 3) {
+                      (endX = i), (endY = j);
+                    }
                   }
                 }
-              }
 
-              if (startX === -1 || startY === -1) {
-                setFeedback("You have to select a starting cell!");
-              } else if (endX === -1 || endY === -1) {
-                setFeedback("You have to select a finish cell!");
+                if (startX === -1 || startY === -1) {
+                  setFeedback("You have to select a starting cell!");
+                } else if (endX === -1 || endY === -1) {
+                  setFeedback("You have to select a finish cell!");
+                } else {
+                  setFeedback("");
+                  setMode(RUNNING_MODE);
+                }
               } else {
+                dispatch(clearMaze());
                 setFeedback("");
-                setMode(RUNNING_MODE);
+                setMode(TOGGLE_OBSTACLES_MODE);
               }
-            } else {
-              dispatch(clearMaze());
-              setFeedback("");
-              setMode(TOGGLE_OBSTACLES_MODE);
-            }
-          }}
-        />
+            }}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -318,6 +333,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  button: {
+    width: "30%",
+    borderRadius: 10,
+    overflow: "hidden",
   },
 });
 

@@ -65,9 +65,17 @@ const settings = () => {
             onChangeText={(text) => setColumns(text)}
           />
         </View>
-        <View style={{ width: "80%", marginVertical: 2 }}>
+        <View
+          style={{
+            width: "80%",
+            marginVertical: 2,
+            borderRadius: 10,
+            overflow: "hidden",
+          }}
+        >
           <Button
             title="APPLY DIMENSIONS"
+            color="#7DF9FF"
             onPress={() => handleChangeDimensions()}
           />
         </View>
@@ -75,27 +83,33 @@ const settings = () => {
       <View style={{ width: "100%", marginVertical: 20 }}>
         <Text style={styles.label}>Set algorithm spped</Text>
         <View style={styles.buttonContainer}>
-          <Button
-            title="SLOW"
-            color={speed === SLOW ? "green" : "grey"}
-            onPress={() => {
-              dispatch(setSpeed(SLOW));
-            }}
-          />
-          <Button
-            title="NORMAL"
-            color={speed === NORMAL ? "green" : "grey"}
-            onPress={() => {
-              dispatch(setSpeed(NORMAL));
-            }}
-          />
-          <Button
-            title="FAST"
-            color={speed === FAST ? "green" : "grey"}
-            onPress={() => {
-              dispatch(setSpeed(FAST));
-            }}
-          />
+          <View style={styles.button}>
+            <Button
+              title="SLOW"
+              color={speed === SLOW ? "#228B22" : "grey"}
+              onPress={() => {
+                dispatch(setSpeed(SLOW));
+              }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="NORMAL"
+              color={speed === NORMAL ? "#228B22" : "grey"}
+              onPress={() => {
+                dispatch(setSpeed(NORMAL));
+              }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="FAST"
+              color={speed === FAST ? "#228B22" : "grey"}
+              onPress={() => {
+                dispatch(setSpeed(FAST));
+              }}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -140,6 +154,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     marginVertical: 10,
+  },
+  button: {
+    width: "30%",
+    borderRadius: 10,
+    overflow: "hidden",
   },
 });
 
