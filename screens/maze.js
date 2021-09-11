@@ -21,6 +21,7 @@ import {
  */
 import { run_bfs } from "../algorithms/bfs";
 import { run_dfs } from "../algorithms/dfs";
+import { run_a_star } from "../algorithms/a_star";
 
 import {
   DISTANCE_ADDITIVE_CT,
@@ -80,7 +81,7 @@ const maze = (props) => {
       } else if (algorithm === ALGORITHM_DFS) {
         expandedCells = run_dfs(maze);
       } else if (algorithm === ALGORITHM_A_STAR) {
-        expandedCells = [];
+        expandedCells = run_a_star(maze);
       }
 
       let intervalDuration = 50;
